@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.dept.deptDao">
+    <!-- 增加新的部门 -->
+    <insert id="addDept" parameterType="Dept">
+        INSERT INTO
+          dept
+        VALUE
+          (#{deptID},#{deptName},#{deptText})
+    </insert>
+    <!-- 删除一个部门 -->
+    <delete id="delDept">
+        DELETE
+        FROM dept
+        WHERE deptID = #{deptID}
+    </delete>
+    <!-- 更新一个部门 -->
+    <update id="changeDept">
+        UPDATE
+          dept
+        SET
+          deptID = #{deptID},deptName = #{deptName},deptText = #{deptText}
+        WHERE
+          deptID = #{deptID}
+    </update>
+    <!-- 查询一个部门 -->
+    <select id="queryDept" resultType="Dept">
+        SELECT *
+        FROM dept
+        WHERE
+          deptID = #{deptID}
+    </select>
+    <!-- 查询全部部门 -->
+    <select id="queryAll" resultType="Dept">
+        SELECT *
+        FROM dept
+    </select>
+    <!--按名字模糊查询部门-->
+    <select id="queryByName" resultType="Dept">
+        SELECT *
+        FROM dept
+        WHERE
+          deptName like  "%"#{deptName}"%"
+    </select>
+    <select id="queryDeptWithJob" resultType="Dept">
+        SELECT
+        d.*,
+        j.jobID "Job.jobID",
+        j.deptID "Job.deptID",
+        j.jobName "Job.jobName",
+        j.jobText "Job.jobText"
+        FROM
+          dept d
+          inner join job j ON j.deptID = d.deptID
+        WHERE
+          d.deptID = #{deptID}
+    </select>
+    <!--
+     <select id="queryDeptWithJobAndEmployee" resultType="Dept">
+        SELECT
+          d.*,
+          e.employeeID "employee.employeeID",
+          e.employeeName "employee.employeeName",
+          e.sex "employee.sex",
+          e.birthday "employee.birthday",
+          e.address "employee.addresss",
+          e.code "employee.code",
+          e.learn "employee.learn",
+          e.mobile "employee.mobile",
+          e.email "employee.email",
+          e.jobID "employee.jobID",
+          e.deptID "employee.deptID",
+          e.workState "employee.workState",
+          e.photo "employee.photo",
+          e.pwd "employee.pwd",
+          e.uesrLevel "employee.userLevel",
+          e.onLine "employee.onLine"
+          j.jobID "Job.jobID",
+          j.deptID "Job.deptID",
+          j.jobName "Job.jobName",
+          j.jobText "Job.jobText"
+        FROM
+          dept d
+          inner join employees e ON e.deptID= d.deptID
+          inner join job j ON j.deptID = d.deptID
+        WHERE
+          d.deptID = #{deptID}
+    </select>
+    -->
+</mapper>

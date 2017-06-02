@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.file.fileDao">
+    <!-- 添加一个新的文件 -->
+    <insert id="addFile" parameterType="File">
+        INSERT INTO
+         file
+        (fileTime, fileText, fileForm, fileInt, fileName,fileRoute)
+        VALUES
+        (#{fileTime},#{fileText},#{fileForm},#{fileInt},#{fileName},#{fileRoute})
+    </insert>
+    <!-- 删除一个的文件 -->
+    <delete id="delFile">
+        DELETE
+        FROM file
+        WHERE fileID = #{fileID}
+    </delete>
+    <!-- 更新一个文件 -->
+    <update id="changeFile">
+        UPDATE
+          file
+        SET
+          fileTime = #{fileTime},fileText = #{fileText},fileForm = #{fileForm},fileInt = #{fileInt},fileName = #{fileName},fileRoute = #{fileRoute}
+        WHERE
+          fileID = #{fileID}
+    </update>
+    <!-- 查询一个激活的文件 -->
+    <select id="queryFile" resultType="File">
+        SELECT *
+        FROM file
+        WHERE
+          fileID = #{fileID}
+    </select>
+    <!-- 查询全部激活的文件 -->
+    <select id="queryAll" resultType="File">
+        SELECT *
+        FROM file
+    </select>
+</mapper>

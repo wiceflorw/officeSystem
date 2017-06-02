@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.active.activeDao">
+    <!-- 插入一条新的信息 -->
+    <insert id="addActive" parameterType="Active">
+        INSERT INTO
+         active
+        VALUES
+        (#{activeID},#{activeName},#{activeInfo},#{activeAgreeNum},#{whetherGlobal},#{employeeID})
+    </insert>
+    <!-- 删除一个的活动 -->
+    <delete id="delActive">
+        DELETE
+        FROM active
+        WHERE activeID = #{activeID}
+    </delete>
+    <!-- 更新一个活动 -->
+    <update id="changeActive">
+        UPDATE
+          active
+        SET
+          activeID = #{activeID},activeName = #{activeName},activeInfo = #{activeInfo},activeAgreeNum = #{activeAgreeNum},whetherGlobal = #{whetherGlobal},employeeID = #{employeeID}
+        WHERE
+          activeID = #{activeID}
+    </update>
+    <!-- 查询一个激活的活动 -->
+    <select id="checkActive" resultType="Active">
+        SELECT *
+        FROM active
+        WHERE
+          activeID = #{activeID}
+    </select>
+    <!-- 查询全部激活的活动 -->
+    <select id="queryAll" resultType="Active">
+        SELECT *
+        FROM active
+    </select>
+</mapper>

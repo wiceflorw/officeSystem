@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.employees.employeeDao">
+    <!-- 插入一个新的员工 -->
+    <insert id="addEmployee" parameterType="Employees">
+        INSERT INTO
+         employees
+         (employeeID, employeeName, sex, birthday, address,code, learn, mobile, email, jobID, deptID, workState, photo, pwd, uesrLevel, onLine)
+        VALUES
+        (#{employeeID},#{employeeName},#{sex},#{birthday},#{address},#{code},#{learn},#{mobile},#{email},#{jobID},#{deptID},#{workState},#{photo},#{pwd},#{userLevel},#{onLine})
+    </insert>
+    <!-- 删除一个的员工 -->
+    <delete id="delEmployee">
+        DELETE
+        FROM employees
+        WHERE employeeID = #{employeeID}
+    </delete>
+    <!-- 更新一个员工信息 -->
+    <update id="changeEmployee">
+        UPDATE
+          employees
+        SET
+          employeeID = #{employeeID},employeeName = #{employeeName},sex = #{sex},birthday = #{birthday},address = #{address},code = #{code},learn = #{learn},mobile = #{mobile},email = #{email}
+        WHERE
+          employeeID = #{employeeID}
+    </update>
+    <!-- 查询一个员工信息 -->
+    <select id="queryEmployee" resultType="Employees">
+        SELECT
+          e.*,
+          d.deptID "Dept.deptID",
+          d.deptName "Dept.deptName",
+          d.deptText "Dept.deptText",
+          j.jobID "Job.jobID",
+          j.deptID "Job.deptID",
+          j.jobName "Job.jobName",
+          j.jobText "Job.jobText"
+        FROM
+          employees e
+          inner join dept d ON e.deptID= d.deptID
+          inner join job j ON j.jobID = e.jobID
+        WHERE
+          employeeID = #{employeeID}
+    </select>
+    <!-- 查询全部员工信息 -->
+    <select id="queryAll" resultType="Employees">
+        SELECT *
+        FROM employees
+    </select>
+    <!-- 修改密码 -->
+    <update id="changepsw">
+        UPDATE
+          employees
+        SET
+          pwd = #{1}
+        WHERE
+          employeeID = #{0}
+    </update>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.notice_allhistory.noticeAllhistory">
+    <!-- 增加一个公告信息 -->
+    <insert id="addNotice" parameterType="NoticeAllhistory">
+        INSERT INTO
+         notice_allhistory
+         (noteID, employeeID, noteName, noteInfo, noteTime, whetherGlobal, status)
+        VALUES
+        (#{noteID},#{employeeID},#{noteName},#{noteInfo},#{noteTime},#{whetherGlobal},#{status})
+    </insert>
+    <!-- 修改一个公告信息 -->
+    <update id="changeNotice">
+        UPDATE
+          notice_allhistory
+        SET
+          noteID = #{noteID},employeeID = #{employeeID},noteName = #{noteName},noteInfo = #{noteInfo},noteTime = #{noteTime},whetherGlobal = #{whetherGlobal},status = #{status}
+        WHERE
+          noteID = #{noteID}
+    </update>
+    <!-- 查询现有所有公告 -->
+    <select id="queryNotice" resultType="NoticeAllhistory">
+        SELECT *
+        FROM notice_allhistory
+    </select>
+    <!-- 修改一个公告属性 -->
+    <update id="modiftystatus">
+        UPDATE
+        notice_allhistory
+        SET
+        status = #{status}
+        WHERE
+        noteID = #{noteID}
+    </update>
+    <!-- 查询一个公告 -->
+    <select id="querryone" resultType="NoticeAllhistory">
+        SELECT
+          n.*,
+          e.employeeName "Employees.employeeName"
+        FROM notice_allhistory n
+        INNER JOIN employees e ON e.employeeID = n.employeeID
+        WHERE
+        noteID = #{noteID}
+    </select>
+</mapper>

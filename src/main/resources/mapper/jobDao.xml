@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.job.jobDao">
+    <!-- 增加新的职位 -->
+    <insert id="addJob" parameterType="Job">
+        INSERT INTO
+         job
+        (jobID, deptID, jobName, jobText)
+        VALUES
+        (#{jobID},#{deptID},#{jobName},#{jobText})
+    </insert>
+    <!-- 删除一个职位 -->
+    <delete id="delJob">
+        DELETE
+        FROM job
+        WHERE jobID = #{jobID}
+    </delete>
+    <!-- 修改一个职位 -->
+    <update id="changeJob">
+        UPDATE
+          job
+        SET
+          jobID = #{jobID},deptID = #{deptID},jobName = #{jobName},jobText = #{jobText}
+        WHERE
+          jobID = #{jobID}
+    </update>
+    <!-- 查询一个职位 -->
+    <select id="queryJob" resultType="Job">
+        SELECT *
+        FROM job
+        WHERE
+          jobID = #{jobID}
+    </select>
+    <!-- 查询所有工作 -->
+    <select id="queryAll" resultType="Job">
+        SELECT *
+        FROM job
+    </select>
+</mapper>

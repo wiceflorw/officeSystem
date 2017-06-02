@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.task.taskDao">
+    <!-- 增加一个任务信息 -->
+    <insert id="addTask" parameterType="Task">
+        INSERT INTO
+          task
+          (taskID, taskName, taskInfo, getTime, taskState, employeeID, doID)
+        VALUES
+          (#{taskID},#{taskName},#{taskInfo},#{getTime},#{taskState},#{employeeID},#{doID})
+    </insert>
+    <!-- 删除一个任务信息 -->
+    <delete id="delTask">
+        DELETE
+        FROM task
+        WHERE taskID = #{taskID}
+    </delete>
+    <!-- 修改一个任务信息 -->
+    <update id="changeTask">
+        UPDATE
+          task
+        SET
+          taskID = #{taskID},taskName = #{taskName},taskInfo = #{taskInfo},getTime = #{getTime},taskState = #{taskState},employeeID = #{employeeID},doID = #{doID}
+        WHERE
+          taskID = #{taskID}
+    </update>
+    <!-- 查询一个任务信息 -->
+    <select id="queryTask" resultType="Task">
+        SELECT *
+        FROM task
+        WHERE
+          taskID = #{taskID}
+    </select>
+    <!-- 查询现激活的所有任务 -->
+    <select id="queryAll" resultType="Task">
+        SELECT *
+        FROM task
+    </select>
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.active_allhistory.activeAllhistoryDao">
+    <!-- 插入一条新的信息 -->
+    <insert id="addActiveAllhistory" parameterType="ActiveAllhistory">
+        <!-- 主键冲突会报错，添加ignore -->
+        INSERT ignore INTO
+         active_allhistory
+        VALUES
+        (#{activeID},#{activeName},#{activeInfo},#{activeAgreeNum},#{whetherGlobal},#{employeeID},#{status})
+    </insert>
+
+    <!-- 更新一个活动 -->
+    <update id="changeActive">
+        UPDATE
+          active_allhistory
+        SET
+          activeID = #{activeID},activeName = #{activeName},activeInfo = #{activeInfo},activeAgreeNum = #{activeAgreeNum},whetherGlobal = #{whetherGlobal},employeeID = #{employeeID},status = #{status}
+        WHERE
+          activeID = #{activeID}
+    </update>
+    <!-- 查询全部激活的活动 -->
+    <select id="queryAll" resultType="ActiveAllhistory">
+        SELECT *
+        FROM active_allhistory
+    </select>
+</mapper>

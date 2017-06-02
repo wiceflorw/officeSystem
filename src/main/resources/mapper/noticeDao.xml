@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.notice.noticeDao">
+    <!-- 增加一个公告信息 -->
+    <insert id="addNotice" parameterType="Notice">
+        INSERT INTO
+         notice
+         (noteID, employeeID, noteName, noteInfo, noteTime, whetherGlobal)
+        VALUES
+         (#{noteID},#{employeeID},#{noteName},#{noteInfo},#{noteTime},#{whetherGlobal})
+    </insert>
+    <!-- 删除一个公告信息 -->
+    <delete id="delNotice">
+        DELETE
+        FROM notice
+        WHERE noteID = #{noteID}
+    </delete>
+    <!-- 修改一个公告信息 -->
+    <update id="changeNotice">
+        UPDATE
+          notice
+        SET
+          noteID = #{noteID},employeeID = #{employeeID},noteName = #{noteName},noteInfo = #{noteInfo},noteTime = #{noteTime},whetherGlobal = #{whetherGlobal}
+        WHERE
+          noteID = #{noteID}
+    </update>
+    <!-- 查询一个公告信息 -->
+    <select id="queryNotice" resultType="Notice">
+        SELECT
+          n.*,
+          e.employeeName "Employees.employeeName"
+        FROM notice n
+        inner join employees e ON e.employeeID=n.employeeID
+        WHERE
+          noteID = #{noteID}
+    </select>
+    <!-- 查询现有所有激活的公告 -->
+    <select id="queryAll" resultType="Notice">
+        SELECT *
+        FROM notice
+    </select>
+</mapper>

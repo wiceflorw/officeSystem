@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.email.emailDao">
+    <!-- 插入新的邮件 -->
+    <insert id="addEmail" parameterType="Email">
+        INSERT INTO
+         email(sender, addressee, senderemail, title, test, fileroad)
+        VALUES
+        (#{sender},#{addressee},#{senderemail},#{title},#{test},#{fileroad})
+    </insert>
+    <!-- 删除邮件 -->
+    <delete id="delEamail">
+        DELETE
+        FROM email
+        WHERE id = #{emailID}
+    </delete>
+    <!-- 查询一封邮件 -->
+    <select id="searchEmail" resultType="Email">
+        SELECT *
+        FROM email
+        WHERE
+          id = #{emailID}
+    </select>
+    <!-- 查询全部邮件 -->
+    <select id="searchall" resultType="Email">
+        SELECT *
+        FROM email
+    </select>
+</mapper>
